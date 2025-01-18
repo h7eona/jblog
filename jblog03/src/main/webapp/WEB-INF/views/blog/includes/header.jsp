@@ -19,7 +19,7 @@
 				<c:if test="${authUser.id eq id}">
 					<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
 					<li><a href="${pageContext.request.contextPath}/${id}/admin/default">블로그 관리</a></li>
-					<li><a href="${pageContext.request.contextPath}/">홈</a></li>
+					<li><a href="${pageContext.request.contextPath}/${id}">홈</a></li>
 				</c:if>
 			</c:otherwise>
 		</c:choose>

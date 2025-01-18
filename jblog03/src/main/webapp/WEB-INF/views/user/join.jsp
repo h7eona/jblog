@@ -53,17 +53,21 @@
 			  name="joinForm"
 			  method="post" 
 			  action="${pageContext.request.contextPath}/user/join">
+			  
 			<label class="block-label" for="name"><spring:message code="user.join.label.name"/></label>
+			
 			<form:input path="name" />
 			<p style="color:#f00; text-align: left; padding: 0">
-			<spring:hasBindErrors name="userVo">
-			<c:if test="${errors.hasFieldErrors('name')}">
-				<spring:message code="${errors.getFieldError('name').codes[0]}"/>
-			</c:if>
-			</spring:hasBindErrors>
+				<spring:hasBindErrors name="userVo">
+				
+					<c:if test="${errors.hasFieldErrors('name')}">
+						<spring:message code="${errors.getFieldError('name').codes[0]}"/>
+					</c:if>
+				</spring:hasBindErrors>
 			</p>
+			
 			<label class="block-label" for="id"><spring:message code="user.join.label.id"/></label>
-				<form:input path="id"/>
+			<form:input path="id"/>
 			<input id="btn-checkId" type="button" value="id 중복체크">
 			<img id="img-checkId" src="${pageContext.request.contextPath}/assets/images/check.png" style="display: none;">
 			<p style="color:#f00; text-align: left; padding: 0">
@@ -73,16 +77,16 @@
 			<label class="block-label" for="password"><spring:message code="user.join.label.password"/></label>
 			<form:password path="password" />
 			<spring:hasBindErrors name="userVo">
-			<c:if test="${errors.hasFieldErrors('password')}">
-				<p style="color:#f00; text-align: left; padding: 0">
-				<spring:message code="${errors.getFieldError('password').codes[0]}"/>
-				</p>
-			</c:if>
+				<c:if test="${errors.hasFieldErrors('password')}">
+					<p style="color:#f00; text-align: left; padding: 0">
+					<spring:message code="${errors.getFieldError('password').codes[0]}"/>
+					</p>
+				</c:if>
 			</spring:hasBindErrors>
 
 			<fieldset>
 				<legend>약관동의</legend>
-				<input id="agree-prov" type="checkbox" name="agreeProv" value="y">
+				<input id="agree-prov" type="checkbox" name="agreeProv" value="y" required>
 				<label class="l-float">서비스 약관에 동의합니다.</label>
 			</fieldset>
 
