@@ -109,9 +109,11 @@ public class BlogController {
 			@PathVariable("id") String id,
 			@ModelAttribute BlogVo blogVo, @RequestParam("file") MultipartFile multipartFile) {
 		String profile = fileUploadService.restore(multipartFile);
+		
 		if(profile != null) {
 			blogVo.setProfile(profile);
 		}
+		
 		blogService.updateBlog(blogVo);
 		servletContext.setAttribute("blog", blogVo);
 		
@@ -141,6 +143,7 @@ public class BlogController {
 			@RequestParam("name") String name,
 			@RequestParam("desc") String description) {
 		CategoryVo categoryVo = new CategoryVo();
+		
 		categoryVo.setName(name); 
 		categoryVo.setDescription(description);
 		categoryVo.setBlogId(authUser.getId());
@@ -169,8 +172,7 @@ public class BlogController {
 		
 		BlogVo blog = blogService.getBlog(authUser.getId());
 		model.addAttribute("blog", blog);
-		
-		
+
 		return "blog/admin-write";
 	}
 	
@@ -182,8 +184,8 @@ public class BlogController {
 			@RequestParam("title") String title,
 			@RequestParam("content") String content,
 			@RequestParam(value="category", required=false) Long categoryId) {
-		
 		PostVo postVo = new PostVo();
+		
 		postVo.setTitle(title);
 		postVo.setContents(content);
 		postVo.setCategoryId(categoryId);
