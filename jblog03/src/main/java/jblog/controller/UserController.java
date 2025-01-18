@@ -18,7 +18,8 @@ import jblog.vo.UserVo;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	private final UserService userService;
+	
+	private UserService userService;
 	
 	public UserController(UserService userService) {
 		this.userService = userService;
@@ -30,7 +31,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/join")
-	public String join(@Valid @ModelAttribute UserVo vo, BindingResult result, Model model) {
+	public String join(@ModelAttribute @Valid UserVo vo, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			Map<String, Object> map = result.getModel();
 			model.addAllAttributes(map);
@@ -43,6 +44,11 @@ public class UserController {
 	@GetMapping("/joinsuccess")
 	public String joinsuccess() {
 		return "user/joinsuccess";
+	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "user/login";
 	}
 
 }

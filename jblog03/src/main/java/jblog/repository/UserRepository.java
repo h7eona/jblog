@@ -1,5 +1,7 @@
 package jblog.repository;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -24,4 +26,10 @@ public class UserRepository {
 	public UserVo findByName(String name) {
 		return sqlSession.selectOne("user.findByName", name);
 	}
+
+	public UserVo findByIdAndPassword(String id, String password) {
+		return sqlSession.selectOne(
+				"user.findByIdAndPassword", 
+				Map.of("id", id, "password", password));
+	}	
 }

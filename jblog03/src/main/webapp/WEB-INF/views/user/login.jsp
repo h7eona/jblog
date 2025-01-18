@@ -1,6 +1,7 @@
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
 <%@ taglib uri="jakarta.tags.functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!doctype html>
 <html>
@@ -12,16 +13,18 @@
 </head>
 <body>
 	<div class="center-content">
-		<h1 class="logo">JBlog</h1>
-		<ul class="menu">
-			<li><a href="">로그인</a></li>
-			<li><a href="">회원가입</a></li>
-			<li><a href="">로그아웃</a></li>
-			<li><a href="">내블로그</a></li>
-		</ul>
-		<form class="login-form">
-      		<label>아이디</label> <input type="text" name="id">
-      		<label>패스워드</label> <input type="text" name="password">
+		<c:import url="/WEB-INF/views/includes/header.jsp" />
+		<form class="login-form" name="loginform" method="post" action="${pageContext.request.contextPath}/user/auth">
+			<label for="id"><spring:message code="user.join.label.id"/></label>
+			<input id="id" name="id" type="text" value="">
+			
+			<label for="password"><spring:message code="user.join.label.password"/></label>
+			<input id="password" name="password" type="password" value="">
+			<c:if test="${result == 'fail'}">
+				<p>
+					로그인이 실패 했습니다.
+				</p>
+			</c:if>
       		<input type="submit" value="로그인">
 		</form>
 	</div>
