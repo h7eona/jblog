@@ -12,10 +12,15 @@
 	
 	<select id="find" parameterType="string" resultType="categoryvo">
 		<![CDATA[
-			select id, name, description, blog_id as blogId
-			  from category 
-			 where blog_id = #{blogId}
-		  order by id asc;
+			select 
+				a.id, 
+				a.name, 
+				a.description, 
+				a.blog_id as blogId,
+				(select count(*) from post b where b.category_id=a.id) as postCount
+			  from category a
+			 where a.blog_id = #{blogId}
+		  order by a.id asc;
 		]]>
 	</select>
 	

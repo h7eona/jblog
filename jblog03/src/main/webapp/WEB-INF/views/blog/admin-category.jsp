@@ -20,6 +20,7 @@
 		      		<tr>
 		      			<th>번호</th>
 		      			<th>카테고리명</th>
+		      			<th>포스트 수</th>
 		      			<th>설명</th>
 		      			<th>삭제</th>      			
 		      		</tr>
@@ -27,15 +28,25 @@
 						<tr>
 							<td>${status.index + 1}</td>
 							<td>${vo.name}</td>
+							<td>${vo.postCount}</td>
 							<td>${vo.description}</td>
 							<td>
-								<c:if test="${status.index ne 0}">
-									<form id="deleteForm_${status.index}" action="${pageContext.request.contextPath}/${blog.id}/admin/category/delete/${vo.id}" method="post" style="display:inline;">
-										<a href="javascript:void(0);" onclick="confirmDelete('deleteForm_${status.index}')">
-											<img src="${pageContext.request.contextPath}/assets/images/delete.jpg">
-										</a>
-									</form>
-								</c:if>
+								<c:choose>
+				                    <c:when test="${vo.postCount > 0 and status.index ne 0}">
+				                        <a href="javascript:void(0);" onclick="alert('게시물이 있어 삭제할 수 없습니다.');">
+					                        <img src="${pageContext.request.contextPath}/assets/images/delete.jpg">
+					                    </a>
+				                    </c:when>
+				                    <c:otherwise>
+				                    	<c:if test="${status.index ne 0}">
+					                        <form id="deleteForm_${status.index}" action="${pageContext.request.contextPath}/${blog.id}/admin/category/delete/${vo.id}" method="post" style="display:inline;">
+					                            <a href="javascript:void(0);" onclick="confirmDelete('deleteForm_${status.index}')">
+					                                <img src="${pageContext.request.contextPath}/assets/images/delete.jpg">
+					                            </a>
+					                        </form>
+					                   </c:if>
+				                    </c:otherwise>
+				                </c:choose>
 							</td>
 						</tr>
 					</c:forEach>  
